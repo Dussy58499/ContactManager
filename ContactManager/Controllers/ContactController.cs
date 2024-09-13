@@ -32,11 +32,16 @@ namespace ContactManager.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPut("Edit/{id}")]
-        public async Task<IActionResult> Edit(Guid id, [FromBody] Contact updatedContact)
+        [HttpPut("Save/{id}")]
+        public async Task<IActionResult> Save(Guid id, [FromBody] Contact updatedContact)
         {
             try
             {
+                if (updatedContact == null)
+                {
+                    return BadRequest("Contact data is null.");
+                }
+
                 await _contactService.UpdateContactAsync(id, updatedContact);
                 return Ok();
             }

@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repository.Interfaces;
 using Repository.Models.Domain;
 using Service.Interfaces;
 using Service.Services;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.IO;

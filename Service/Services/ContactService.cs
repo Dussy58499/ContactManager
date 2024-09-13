@@ -33,7 +33,7 @@ namespace Service.Services
                 while (!reader.EndOfStream)
                 {
                     var line = await reader.ReadLineAsync();
-                    var values = line.Split(';');
+                    var values = line.Split(';'); //My csv file with , was with ; so if your have , just change ";" to ","
 
                     var name = values[0];
                     var dateOfBirth = DateTime.Parse(values[1]);
@@ -41,7 +41,6 @@ namespace Service.Services
                     var phone = values[3];
                     var salary = decimal.Parse(values[4]);
 
-                    //To avoid identical data
                     var existingContact = await _repository.FindByConditionAsync(c =>
                         c.Name == name &&
                         c.DateOfBirth == dateOfBirth &&

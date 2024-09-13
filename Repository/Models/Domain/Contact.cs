@@ -19,6 +19,7 @@ namespace Repository.Models.Domain
 
         [Required(ErrorMessage = "Phone is required.")]
         [Phone(ErrorMessage = "Invalid phone number.")]
+        [StringLength(12, ErrorMessage = "Phone number can't be longer than 12 characters.")]
         public string Phone { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "Salary must be a positive number.")]
