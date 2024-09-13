@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Repository.Models.Domain.Contact>
+
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form id="uploadCsvForm" asp-action="UploadCsv" method="post" enctype="multipart/form-data">
+    <input type="file" name="csvFile" />
+    <button type="submit">Upload CSV</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date Of Birth</th>
+            <th>Married</th>
+            <th>Phone</th>
+            <th>Salary</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr data-id="@contact.Id">
+                <td>
+                    <span class="view-mode">@contact.Name</span>
+                    <input type="text" class="edit-mode" data-field="Name" value="@contact.Name" style="display:none;" />
+                </td>
+                <td>
+                    <span class="view-mode">@contact.DateOfBirth.ToShortDateString()</span>
+                    <input type="date" class="edit-mode" data-field="DateOfBirth" value="@contact.DateOfBirth.ToString("yyyy-MM-dd")" style="display:none;" />
+                </td>
+                <td>
+                    <span class="view-mode">@contact.Married</span>
+                    <input type="checkbox" class="edit-mode" data-field="Married" @(contact.Married ? "checked" : "") style="display:none;" />
+                </td>
+                <td>
+                    <span class="view-mode">@contact.Phone</span>
+                    <input type="text" class="edit-mode" data-field="Phone" value="@contact.Phone" style="display:none;" />
+                </td>
+                <td>
+                    <span class="view-mode">@contact.Salary</span>
+                    <input type="number" step="0.01" class="edit-mode" data-field="Salary" value="@contact.Salary" style="display:none;" />
+                </td>
+                <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="save-btn" style="display:none;">Save</button>
+                    <button class="cancel-btn" style="display:none;">Cancel</button>
+                </td>
+                <td>
+                    <a class="delete-btn" asp-action="Delete" asp-route-id="@contact.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
